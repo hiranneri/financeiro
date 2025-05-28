@@ -1,13 +1,15 @@
 server:
-  port: 8082
   application:
     name: financeiro
+  port: 8082
   error:
     include-stacktrace: never
 
 spring:
+  kafka:
+    bootstrap-servers: localhost:9093
   datasource:
-    url: jdbc:postgresql://banco-financeiro:5434/financeiro
+    url: jdbc:postgresql://127.0.0.1:5432/financeiro
     username: postgres
     password: secret
     driver-class-name: org.postgresql.Driver
@@ -25,3 +27,4 @@ spring:
         boot:
           allow_jdbc_metadata_access: false
     generate-ddl: true
+

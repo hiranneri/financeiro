@@ -22,7 +22,7 @@ import org.testcontainers.junit.jupiter.Testcontainers;
 @SpringBootTest(classes = FinanceiroApplication.class)
 @AutoConfigureMockMvc
 @Testcontainers
-@ActiveProfiles("dev")
+@ActiveProfiles("qa")
 @TestMethodOrder(MethodOrderer.MethodName.class)
 public class TestContainerConfig {
 
@@ -38,18 +38,6 @@ public class TestContainerConfig {
             .withPassword("secret")
             .withReuse(true);
 
-    /*
-    @Override
-    @DynamicPropertySource
-    public void initialize(ConfigurableApplicationContext applicationContext) {
-         postgreSQLContainer.start();
-        TestPropertyValues.of(
-                "spring.datasource.url=" +  postgreSQLContainer.getJdbcUrl(),
-                "spring.datasource.hikari.username=" +  postgreSQLContainer.getUsername(),
-                "spring.datasource.hikari.password=" +  postgreSQLContainer.getPassword(),
-                "spring.datasource.hikari.driver-class-name" +  postgreSQLContainer.getDriverClassName()
-        ).applyTo(applicationContext.getEnvironment());
-    }*/
     @DynamicPropertySource
     static void configureProperties(DynamicPropertyRegistry registry) {
         registry.add("spring.datasource.url", postgreSQLContainer::getJdbcUrl);
