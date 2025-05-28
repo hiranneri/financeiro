@@ -1,0 +1,2 @@
+CREATE DATABASE financeiro;
+GRANT ALL PRIVILEGES ON DATABASE financeiro TO postgres;

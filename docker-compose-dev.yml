@@ -1,0 +1,25 @@
+version: '3.8'
+x-database-variables: &database-variables
+  SPRING_DATASOURCE_URL: jdbc:postgresql://mesadigital-financeiro-pg:5432/
+  POSTGRES_USER: postgres
+  POSTGRES_PASSWORD: secret
+
+services:
+  banco-financeiro:
+    image: postgres:15.4-alpine
+    container_name: mesadigital-financeiro
+    ports:
+      - "5432:5432"
+    volumes:
+      - "mesadigital-financeiro-pg-volume:/var/lib/postgresql/data"
+      - "./init.sql:/docker-entrypoint-initdb.d/init.sql"
+    environment:
+      <<: *database-variables
+    networks:
+      - mesadigital-financeiro-network
+
+networks:
+  mesadigital-financeiro-network:
+
+volumes:
+  mesadigital-financeiro-pg-volume:
